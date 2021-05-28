@@ -1,36 +1,10 @@
-const colors = [
-  '#FFFFFF',
-  '#2196F3',
-  '#4CAF50',
-  '#FF9800',
-  '#009688',
-  '#795548',
-];
-
-const randomIntegerFromInterval = (min, max) => {
-  return Math.floor(Math.random() * (max - min + 1) + min);
+const delay = ms => {
+  return Promise.resolve (`${ms}`)
 };
 
-const btnStart = document.querySelector('[data-action="start"]')
-const btnStop = document.querySelector('[data-action="stop"]')
-const body = document.querySelector('body')
+const logger = time => console.log(`Resolved after ${time}ms`);
 
-btnStart.addEventListener('click', clickStart)
-btnStop.addEventListener('click', clickStop)
-function clickStart() { 
-  btnStart.disabled = true; 
-  timerId = setInterval(() => {
-    bodyColor()
-  }, 1000);
-}
-
-function clickStop(){ 
-  btnStart.disabled = false;
-  clearInterval(timerId);
-}
-
-function bodyColor(){
-  const colorRandom = randomIntegerFromInterval(0, colors.length - 1)
-  body.style.background = colors[colorRandom];
-}
-
+// Вызовы функции для проверки
+delay(2000).then(logger); // Resolved after 2000ms
+delay(1000).then(logger); // Resolved after 1000ms
+delay(1500).then(logger); // Resolved after 1500ms
