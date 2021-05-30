@@ -9,7 +9,11 @@ const randomIntegerFromInterval = (min, max) => {
       setTimeout(() => {        
         const canProcess = Math.random() > 0.3;    
         if (canProcess) {
-          resolve([transaction.id, delay]);  
+          const obj = {
+            id: transaction.id,
+            time: delay
+          };
+          resolve(obj);  
         } else {
           reject(transaction.id);
         }
@@ -18,8 +22,8 @@ const randomIntegerFromInterval = (min, max) => {
     
   };
   
-  const logSuccess = ([id, time]) => {
-    console.log(`Transaction ${id} processed in ${time}ms`);
+  const logSuccess = obj => {
+    console.log(`Transaction ${obj.id} processed in ${obj.time}ms`);
   };  
   const logError = id => {
     console.warn(`Error processing transaction ${id}. Please try again later.`);
